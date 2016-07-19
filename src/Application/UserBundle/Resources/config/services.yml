@@ -1,0 +1,8 @@
+services:
+    # app_user.transaction:
+      # class: Application\UserBundle\Form\UserType
+      # arguments: ["@service_id", "plain_value", %parameter%]
+      # tags:		
+        # -{ name: form.type, alias: app_user_transaction }
+       
+       # arguments: ["@service_id", "plain_value", %parameter%]

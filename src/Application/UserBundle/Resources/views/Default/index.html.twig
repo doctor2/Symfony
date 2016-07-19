@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <div style="border:2px solid black; width:100%; height:auto;">
+    	<h1>Последние комментарии</h1>
+    	<div style="border:2px solid black; width:100%; height:auto; padding:15px">
+		    {% for s in results  %}
+		    <p>	{{s.text}} |
+				{{s.name}}
+			</p>
+    		{% endfor %}
+		</div>
+		<div style="border:2px solid black; width:100%; height:auto; padding:15px">
+		<h1><a href="{{path('application_user_homepage')}}">home</a></h1>
+     <form action="{{path('application_user_homepage')}}" method="post">
+     	{% for type, message in app.session.flashbag.all() %}
+			   {% if type == 'error' %}
+			   		<div style="border:2px solid black; width:200px; height:auto; background:red; padding:10px">
+			           {{ message[0] }}
+			        </div>
+			   {% elseif type == 'succes' %}
+			        <div style="border:2px solid black; width:200px; height:auto;background:green; padding:10px">
+			           {{ message[0] }}
+			        </div>
+			   {% endif %}
+		{% endfor %}
+    	<p>Вы {{user.name}}.  У вас на счету {{user.balance}}. </p>
+    	<p>Перевести сумму <input type="number" name="sum" min="0" max="{{user.balance}}" value="0" style="width:60px">р 
+    		<select name="user">
+		    	{% for other in otherUsers  %}
+				    	<option value="{{other.id}}">{{other.name}}</option>
+		    	{% endfor %}
+			</select>
+    	</p>
+    	
+    	<input type="submit" value="Перевести">
+    </form>
+    </div>
+   	 <div style="border:2px solid black; width:100%; height:auto; padding:15px">
+		    {% for user in allUser  %}
+		    <p>	{{user.name}} |
+				{{user.balance}}
+			</p>
+    		{% endfor %}
+    </div>
+{% endblock %}
